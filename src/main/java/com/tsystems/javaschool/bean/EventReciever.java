@@ -3,6 +3,7 @@ package com.tsystems.javaschool.bean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
 import javax.jms.*;
@@ -19,8 +20,9 @@ public class EventReciever {
     private QueueSession session;
     private QueueReceiver receiver;
 
+    @PostConstruct
     public void init() throws NamingException, JMSException {
-        log.info("Event Reciver started");
+        log.info("Event Reciever started");
         Properties props = new Properties();
         props.put("java.naming.factory.initial", "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
         props.put("java.naming.provider.url", "tcp://localhost:61616");
@@ -44,6 +46,7 @@ public class EventReciever {
 
     @PreDestroy
     public void destroy() throws JMSException {
+        log.info("Event Reciever destroyed");
         receiver.close();
         session.close();
         connection.close();

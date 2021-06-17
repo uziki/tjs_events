@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.jms.*;
 import java.util.List;
 
-@Singleton
+
 public class MyMessageListener implements MessageListener {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private QueueSession session;

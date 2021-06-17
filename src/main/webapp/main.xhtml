@@ -1,21 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>#{helloworld.message}</title>
+    <title>Event List</title>
+    <style type="text/css">
+        h1, h2 {
+            display: inline;
+        }
+    </style>
 </h:head>
-
 <h:body>
-    <p:panel id="horizontal" header="Horizontal Toggle" toggleable="true" toggleOrientation="horizontal">
-        <h:panelGrid columns="2" cellpadding="10">
-            <img src="https://images.unsplash.com/photo-1545289415-50dff9405935?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=250&amp;q=80" alt="100"/>
 
-            <h:outputText value="#{helloworld.message}" />
-        </h:panelGrid>
-    </p:panel>
+
+    <!--#{helloWorld.message}
+    <h:outputText value="#{helloWorld.message}"/>
+    <h:outputText value="4"/>-->
+     <div class="card" >
+         <p:dataTable style="text-align: center" id="events" var="event" value="#{eventView.events}" stripedRows="true" >
+             <f:facet name="header">
+                 <h2>Event List</h2>
+             </f:facet>
+             <p:column style="text-align: center"  headerText="Time">
+                 <h:outputText  value="#{event.time}"/>
+             </p:column>
+             <p:column style="text-align: center"  headerText="Patient">
+                 <h:outputText  value="#{event.patient}"/>
+             </p:column>
+             <p:column style="text-align: center"  headerText="Prescription">
+                 <h:outputText  value="#{event.prescription}"/>
+             </p:column>
+         </p:dataTable>
+     </div>
+ <h:form>
+     <f:websocket channel="channel">
+         <f:ajax event="updated" render=":events" />
+     </f:websocket>
+ </h:form>
 
 </h:body>
+
 </html>

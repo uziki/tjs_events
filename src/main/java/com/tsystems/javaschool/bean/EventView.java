@@ -18,7 +18,6 @@ public class EventView implements Serializable {
     private UpdatePageBean updatePageBean;
 
     public List<Event> getEvents() {
-        System.out.println("eventview");
         log.info("EventView getEvents");
         return updatePageBean.getProductList();
     }
