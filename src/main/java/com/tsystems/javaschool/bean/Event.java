@@ -1,12 +1,7 @@
 package com.tsystems.javaschool.bean;
 
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-import java.io.Serializable;
 
-@Named("helloworld")
-@ViewScoped
-public class Event implements Serializable {
+public class Event {
     private String time;
     private String date;
     private String patient;
@@ -52,8 +47,5 @@ public class Event implements Serializable {
         this.date = date;
         this.patient = patient;
         this.prescription = prescription;
-    }
-    public String getMessage() {
-        return "Hello World!";
     }
 }

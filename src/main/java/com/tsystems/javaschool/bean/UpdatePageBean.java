@@ -8,10 +8,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.push.Push;
 import javax.faces.push.PushContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+@Named("eventsView")
 @ApplicationScoped
 @Singleton
 public class UpdatePageBean implements Serializable {
@@ -22,17 +23,16 @@ public class UpdatePageBean implements Serializable {
     @Push(channel = "channel")
     private PushContext pushContext;
 
-    private List<Event> eventList = new ArrayList<Event>(){{
-        add(new Event("12:00", "10.06", "Petrov", "Boleet"));
-    }};
+    private List<Event> events;
 
     public void onUpdate(List<Event> events) {
-        eventList = events;
+        this.events = events;
         log.info("updated");
         pushContext.send("updated");
     }
 
-    public List<Event> getProductList() {
-        return eventList;
+    public List<Event> getEvents() {
+        log.info("Message on screen");
+        return events;
     }
 }

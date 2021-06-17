@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.jms.*;
 import javax.naming.Context;
@@ -14,8 +15,9 @@ import javax.naming.NamingException;
 import java.util.List;
 import java.util.Properties;
 
+@Startup
 @Singleton
-public class EventReciever {
+public class EventReceiver {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private QueueConnection connection;
@@ -31,7 +33,7 @@ public class EventReciever {
 
     @PostConstruct
     public void init() throws NamingException, JMSException {
-        log.info("Event Reciever started");
+        log.info("Event Receiver started");
         Properties props = new Properties();
         props.put("java.naming.factory.initial", "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
         props.put("java.naming.provider.url", "tcp://localhost:61616");
@@ -47,7 +49,7 @@ public class EventReciever {
         session = connection.createQueueSession(true, Session.AUTO_ACKNOWLEDGE);
         receiver = session.createReceiver(queue);
 
-        MessageListener messageListener = new MessageListener() {
+        final MessageListener messageListener = new MessageListener() {
             @Override
             public void onMessage(Message message) {
                 log.info("Message recieved");
@@ -69,9 +71,7 @@ public class EventReciever {
                 updatePageBean.onUpdate(events);
             }
         };
-
         receiver.setMessageListener(messageListener);
-
     }
 
     @PreDestroy
