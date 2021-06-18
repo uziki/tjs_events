@@ -20,7 +20,7 @@
     <div class="card">
         <p:dataTable style="text-align: center" id="events" var="event" value="#{eventsView.events}" stripedRows="true">
             <f:facet name="header">
-                <h2>Event list for today</h2>
+                <p:graphicImage library="img" name="hospital1.png"/> <h2>Event list for today</h2>
             </f:facet>
             <p:column style="text-align: center" headerText="Time">
                 <h:outputText value="#{event.time}"/>
