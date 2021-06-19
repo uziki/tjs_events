@@ -3,9 +3,8 @@ package com.tsystems.javaschool.bean;
 
 public class Event {
     private String time;
-    private String date;
     private String patient;
-    private String prescription;
+    private String eventPrescription;
 
     public String getTime() {
         return time;
@@ -13,14 +12,6 @@ public class Event {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getPatient() {
@@ -31,21 +22,20 @@ public class Event {
         this.patient = patient;
     }
 
-    public String getPrescription() {
-        return prescription;
+    public String getEventPrescription() {
+        return eventPrescription;
     }
 
-    public void setPrescription(String prescription) {
-        this.prescription = prescription;
+    public void setEventPrescription(String eventPrescription) {
+        this.eventPrescription = eventPrescription;
     }
 
     public Event() {
     }
 
-    public Event(String time, String date, String patient, String prescription) {
+    public Event(String time, String patient, String eventPrescription) {
         this.time = time;
-        this.date = date;
         this.patient = patient;
-        this.prescription = prescription;
+        this.eventPrescription = eventPrescription;
     }
 }
